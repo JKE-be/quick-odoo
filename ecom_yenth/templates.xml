@@ -82,5 +82,18 @@
                 </field>
             </field>
         </record>
+
+        <record model="ir.ui.view" id="view_order_yenth_tree_inherit">
+            <field name="name">sale.order.yenth.form.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="after">
+                    <field name="height" />
+                    <field name="width" />
+                    <field name="numberOfUnits" />
+                </xpath>
+            </field>
+        </record>
     </data>
 </openerp>
