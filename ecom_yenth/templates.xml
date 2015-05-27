@@ -1,0 +1,86 @@
+<openerp>
+    <data>
+
+        <template id="cart_inherits" inherit_id="website_sale.cart">
+            <xpath expr="//ul[contains(@class, 'wizard')]/li[3]" position="before">
+              <li><a class="text-muted">Extra<span class="chevron"></span></a></li>
+            </xpath>
+        </template>
+
+        <template id="checkout_inherits" inherit_id="website_sale.checkout">
+            <xpath expr="//ul[contains(@class, 'wizard')]/li[3]" position="before">
+              <li><a class="text-muted">Extra<span class="chevron"></span></a></li>
+            </xpath>
+        </template>
+
+        <template id="payment_inherits" inherit_id="website_sale.payment">
+            <xpath expr="//ul[contains(@class, 'wizard')]/li[3]" position="before">
+              <li><a href="/shop/extra" class="text-success">Extra<span class="chevron"></span></a></li>
+            </xpath>
+        </template>
+
+        <template id="confirmation_inherits" inherit_id="website_sale.confirmation">
+            <xpath expr="//ul[contains(@class, 'wizard')]/li[3]" position="before">
+              <li><a href="/shop/extra" class="text-success">Extra<span class="chevron"></span></a></li>
+            </xpath>
+        </template>
+
+        <template id="extra">
+            <t t-call="website.layout">
+              <div id="wrap">
+                <div class="container oe_website_sale">
+                  <ul class="wizard pull-right">
+                      <li><a href="/shop/cart" class="text-success">Review Order<span class="chevron"></span></a></li>
+                      <li><a href="/shop/checkout" class="text-success">Shipping &amp; Billing<span class="chevron"></span></a></li>
+                      <li class="text-primary">Extra<span class="chevron"></span></li>
+                      <li class="text-muted">Payment<span class="chevron"></span></li>
+                      <li class="text-muted">Confirmation<span class="chevron"></span></li>
+                  </ul>
+                  <h1 class="mb32">Extra infos</h1>
+                  <div class="row">
+                    <form method="post" class="">
+                        <div t-foreach="order.order_line" t-as="line" class="row bg-info" style="padding:15px;margin-top:30px;border-radius:15px;">
+                            <div class="col-xs-6">
+                                <h4 t-esc="line.product_id.name"/>
+                                <br/>
+                                <span t-field="line.product_id.image_medium"
+                                        t-field-options='{"widget": "image", "class": "img-rounded"}'/>
+
+                            </div>
+                            <div class="col-xs-6">
+                              <div class="form-group">
+                                <label>Height</label>
+                                <input type="digit" class="form-control" t-att-name="'%s-%s' % (line.id, 'height')"/>
+                              </div>
+                              <div class="form-group">
+                                <label>Width</label>
+                                <input type="digit" class="form-control" t-att-name="'%s-%s' % (line.id, 'width')"/>
+                              </div>
+                              <div class="form-group">
+                                <label>Qty</label>
+                                <input type="digit" class="form-control" t-att-name="'%s-%s' % (line.id, 'qty')"/>
+                              </div>
+                            </div>
+                        </div>
+                        <input type="submit" class='btn btn-primary pull-right'/>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </t>
+        </template>
+
+        <record model="ir.ui.view" id="view_order_line_yenth_inherit">
+            <field name="name">sale.order.line.yenth.inherit</field>
+            <field name="model">sale.order.line</field>
+            <field name="inherit_id" ref="sale.view_order_line_form2"/>
+            <field name="arch" type="xml">
+                <field name="product_id" position="after">
+                    <field name="height" />
+                    <field name="width" />
+                    <field name="numberOfUnits" />
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>
