@@ -17,12 +17,14 @@ class website_yenth(website_sale):
                     'width': int(post.get('%s-%s' % (line.id, 'width'))),
                     'numberOfUnits': int(post.get('%s-%s' % (line.id, 'qty')))
                 })
-            return request.redirect("/shop/payment")
+            request.session['extra_info_done'] = True
+            return request.redirect("/shop/checkout")
 
         values = dict(order=order)
         return request.website.render("ecom_yenth.extra", values)
 
     @http.route(['/shop/confirm_order'], type='http', auth="public", website=True)
     def confirm_order(self, **post):
-        super(website_yenth, self).confirm_order(**post)
-        return request.redirect("/shop/extra")
+        if not request.session.get('extra_info_done'):
+            return request.redirect("/shop/extra")
+        return super(website_yenth, self).confirm_order(**post)

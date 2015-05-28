@@ -2,25 +2,32 @@
     <data>
 
         <template id="cart_inherits" inherit_id="website_sale.cart">
-            <xpath expr="//ul[contains(@class, 'wizard')]/li[3]" position="before">
+            <xpath expr="//ul[contains(@class, 'wizard')]/li[2]" position="before">
               <li><a class="text-muted">Extra<span class="chevron"></span></a></li>
+            </xpath>
+            <xpath expr="//a[@href='/shop/checkout']" position="attributes">
+              <!-- HACK - TOFIX
+                   crappy method, find alternative... href cannot be changed,
+                   because others inherits use this href in xpath
+              -->
+              <attribute name="onclick">this.href="/shop/extra"</attribute>
             </xpath>
         </template>
 
         <template id="checkout_inherits" inherit_id="website_sale.checkout">
-            <xpath expr="//ul[contains(@class, 'wizard')]/li[3]" position="before">
-              <li><a class="text-muted">Extra<span class="chevron"></span></a></li>
+            <xpath expr="//ul[contains(@class, 'wizard')]/li[2]" position="before">
+              <li><a href="/shop/extra" class="text-success">Extra<span class="chevron"></span></a></li>
             </xpath>
         </template>
 
         <template id="payment_inherits" inherit_id="website_sale.payment">
-            <xpath expr="//ul[contains(@class, 'wizard')]/li[3]" position="before">
+            <xpath expr="//ul[contains(@class, 'wizard')]/li[2]" position="before">
               <li><a href="/shop/extra" class="text-success">Extra<span class="chevron"></span></a></li>
             </xpath>
         </template>
 
         <template id="confirmation_inherits" inherit_id="website_sale.confirmation">
-            <xpath expr="//ul[contains(@class, 'wizard')]/li[3]" position="before">
+            <xpath expr="//ul[contains(@class, 'wizard')]/li[2]" position="before">
               <li><a href="/shop/extra" class="text-success">Extra<span class="chevron"></span></a></li>
             </xpath>
         </template>
@@ -31,8 +38,8 @@
                 <div class="container oe_website_sale">
                   <ul class="wizard pull-right">
                       <li><a href="/shop/cart" class="text-success">Review Order<span class="chevron"></span></a></li>
-                      <li><a href="/shop/checkout" class="text-success">Shipping &amp; Billing<span class="chevron"></span></a></li>
                       <li class="text-primary">Extra<span class="chevron"></span></li>
+                      <li class="text-muted">Shipping &amp; Billing<span class="chevron"></span></li>
                       <li class="text-muted">Payment<span class="chevron"></span></li>
                       <li class="text-muted">Confirmation<span class="chevron"></span></li>
                   </ul>
