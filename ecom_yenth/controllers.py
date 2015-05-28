@@ -13,8 +13,7 @@ class website_yenth(website_sale):
         if post:
             for line in order.order_line:
                 line.write({
-                    'height': int(post.get('%s-%s' % (line.id, 'height'))),
-                    'width': int(post.get('%s-%s' % (line.id, 'width'))),
+                    'isGift': bool(post.get('%s-%s' % (line.id, 'gift'))),
                     'numberOfUnits': int(post.get('%s-%s' % (line.id, 'qty')))
                 })
             request.session['extra_info_done'] = True

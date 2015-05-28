@@ -56,12 +56,11 @@
                             </div>
                             <div class="col-xs-6">
                               <div class="form-group">
-                                <label>Height</label>
-                                <input type="digit" class="form-control" t-att-name="'%s-%s' % (line.id, 'height')"/>
-                              </div>
-                              <div class="form-group">
-                                <label>Width</label>
-                                <input type="digit" class="form-control" t-att-name="'%s-%s' % (line.id, 'width')"/>
+                               <div class="checkbox">
+                                  <label>
+                                    <input type="checkbox"  t-att-name="'%s-%s' % (line.id, 'gift')" /> it is a gift...
+                                  </label>
+                                </div>
                               </div>
                               <div class="form-group">
                                 <label>Qty</label>
@@ -83,8 +82,7 @@
             <field name="inherit_id" ref="sale.view_order_line_form2"/>
             <field name="arch" type="xml">
                 <field name="product_id" position="after">
-                    <field name="height" />
-                    <field name="width" />
+                    <field name="isGift" />
                     <field name="numberOfUnits" />
                 </field>
             </field>
@@ -96,8 +94,7 @@
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="after">
-                    <field name="height" />
-                    <field name="width" />
+                    <field name="isGift" />
                     <field name="numberOfUnits" />
                 </xpath>
             </field>
