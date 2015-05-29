@@ -42,13 +42,22 @@
                   <h1 class="mb32">Extra infos</h1>
                   <div class="row">
                     <form method="post" class="">
+                        <div class="row bg-info" style="padding:15px;margin-top:30px;border-radius:15px;">
+                          Which color:
+                          <select name="color">
+                            <t t-foreach="colors" t-as="color">
+                              <option t-att-value='color.id'>
+                                <span t-field="color.name" />
+                              </option>
+                            </t>
+                          </select>
+                        </div>
                         <div t-foreach="order.order_line" t-as="line" class="row bg-info" style="padding:15px;margin-top:30px;border-radius:15px;">
                             <div class="col-xs-6">
                                 <h4 t-esc="line.product_id.name"/>
                                 <br/>
                                 <span t-field="line.product_id.image_medium"
                                         t-field-options='{"widget": "image", "class": "img-rounded"}'/>
-
                             </div>
                             <div class="col-xs-6">
                               <div class="form-group">
