@@ -1,16 +1,12 @@
 <openerp>
     <data>
 
-        <template id="cart_inherits" inherit_id="website_sale.cart">
+        <template id="cart_inherits" inherit_id="website_sale.cart" priority="1000">
             <xpath expr="//ul[contains(@class, 'wizard')]/li[2]" position="before">
               <li><a class="text-muted">Extra<span class="chevron"></span></a></li>
             </xpath>
             <xpath expr="//a[@href='/shop/checkout']" position="attributes">
-              <!-- HACK - TOFIX
-                   crappy method, find alternative... href cannot be changed,
-                   because others inherits use this href in xpath
-              -->
-              <attribute name="onclick">this.href="/shop/extra"</attribute>
+              <attribute name="href">/shop/extra</attribute>
             </xpath>
         </template>
 
