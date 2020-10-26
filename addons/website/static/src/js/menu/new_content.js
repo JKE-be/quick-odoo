@@ -5,7 +5,7 @@ var core = require('web.core');
 var Dialog = require('web.Dialog');
 var websiteNavbarData = require('website.navbar');
 var wUtils = require('website.utils');
-
+var tour = require('web_tour.tour');
 var qweb = core.qweb;
 var _t = core._t;
 
@@ -56,6 +56,14 @@ var NewContentMenu = websiteNavbarData.WebsiteNavbarActionWidget.extend({
         this.$lastLink = this.$newContentMenuChoices.find('a:last');
 
         if ($.deparam.querystring()[enableFlag] !== undefined) {
+            Object.keys(tour.tours).forEach(
+                el => {
+                    let element = tour.tours[el];
+                    if (element.steps[0].trigger == '#new-content-menu > a') {  // we are alrady IN
+                        element.steps[0].auto = true;
+                    }
+                }
+            );
             this._showMenu();
         }
         return this._super.apply(this, arguments);
